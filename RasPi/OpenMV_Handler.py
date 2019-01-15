@@ -15,12 +15,16 @@ class Handler:
 		while True:
 			if(not self.data.empty()):
 				d = self.data.get(2)
-				if any(self.orange_ball_key in s for s in d):
-					self.orange_ball.put(d, 2)
-				time.sleep(1)
-			else:
-				pass
-				time.sleep(5)
+				#print(d)
+				if d is not None:
+					if d.find(self.orange_ball_key, 0, len(d)) >= 0:
+						#print("FOUND KEY!")
+						self.orange_ball.put(d)
+						time.sleep(0.02)
+					else:
+						time.sleep(0.1)
+				else:
+					pass
 
 	def put_data(self, d):
 		if(self.data.full()):
@@ -30,7 +34,7 @@ class Handler:
 			self.data.put(d, 2)
 
 	def get_ball_info(self):
-		return self.orange_ball.get(2)
+		return self.orange_ball.get()
 
 	def init_threads(self):
 		#define all threads

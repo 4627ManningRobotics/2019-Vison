@@ -26,5 +26,5 @@ if __name__ == '__main__':
 	while True:
 		m = camera.get_message()
 		handler.put_data(m)
-		#print("Camera: {0}".format(handler.get_ball_info()))
+		print("Camera: {0}".format(handler.get_ball_info()))
 		time.sleep(0.02)

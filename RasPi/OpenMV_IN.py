@@ -24,6 +24,7 @@ class Reciever:
 					self.messages.put(self.message, 2)
 				else:
 					self.messages.put(self.message, 2)
+				#print(self.message)
 				self.message = ""
 			else:
 				self.message += input.decode("utf-8", "ignore")
