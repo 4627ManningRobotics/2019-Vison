@@ -8,7 +8,7 @@ class Reciever:
 	def __init__(self):
 		self.openMVIn = serial.Serial('/dev/ttyUSB0', baudrate = 115200, timeout = 0)
 		self.message = ""
-		self.messages = queue.Queue(10)
+		self.messages = queue.Queue(100)
 
 	def in_loop(self):
 		while True:

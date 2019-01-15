@@ -23,6 +23,9 @@ if __name__ == '__main__':
 	handler_thread.start()
 	time.sleep(0.2) #wait for the thread to completely start up
 
+	while camera.get_message() is None:
+		time.sleep(0.001)
+
 	while True:
 		handler.put_data(camera.get_message())
 		ball_info = handler.get_ball_info()
