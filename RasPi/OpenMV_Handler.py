@@ -16,19 +16,22 @@ class Handler:
 		while True:
 			if(not self.data.empty()):
 				d = self.data.get(2)
-				if d is not None and d != " ":
-					print("Data: " + d)
-					foo = json.loads(d)
-					if foo["KEY"] == self.orange_ball_key:
-						#print("KEY FOUND!")
-						self.orange_ball.put(foo)
-						time.sleep(0.01)
-					else:
-						time.sleep(0.05)
+				if d is not None and d != "":
+					try:
+						#print("Data: " + d)
+						foo = json.loads(d)
+						if foo["KEY"] == self.orange_ball_key:
+							#print("KEY FOUND!")
+							self.orange_ball.put(foo)
+							time.sleep(0.001)
+						else:
+							time.sleep(0.003)
+					except:
+						time.sleep(0.001)
 				else:
-					pass
+					time.sleep(0.001)
 			else:
-				time.sleep(0.05)
+				time.sleep(0.003)
 
 	def put_data(self, d):
 		if(self.data.full()):

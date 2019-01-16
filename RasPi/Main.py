@@ -12,6 +12,7 @@ if __name__ == '__main__':
 
 	camera = OpenMV_IN.Reciever()
 	handler = OpenMV_Handler.Handler()
+	time.sleep(0.01) #let the camera decoding start up before the in thread
 
 	camera_thread = threading.Thread(target = camera.in_loop)
 	handler_thread = threading.Thread(target = handler.loop)
@@ -21,9 +22,10 @@ if __name__ == '__main__':
 
 	camera_thread.start()
 	handler_thread.start()
-	time.sleep(0.2) #wait for the thread to completely start up
+	time.sleep(0.01) #wait for the thread to completely start up
 
 	while camera.get_message() is None:
+		#print('none')
 		time.sleep(0.001)
 
 	while True:
@@ -31,4 +33,4 @@ if __name__ == '__main__':
 		ball_info = handler.get_ball_info()
 		if ball_info is not None:
 			print("Ball: {0}".format(ball_info))
-		time.sleep(0.02)
+		time.sleep(0.001)
