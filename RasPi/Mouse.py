@@ -32,6 +32,9 @@ class Mouse:
 	def get_distance(self):
 		return self.inches_per_dot * math.sqrt(self.dx * self.dx + self.dy + self.dy)
 
+	def get_robot_out(self):
+		return {"KEY": "MOUSE", "Distance": self.get_distance()}
+
 	def set_dx(self, dx):
 		self.dx += dx
 
