@@ -1,3 +1,4 @@
+#!/usr/bin/python3 
 import threading
 import queue
 import getopt
@@ -16,7 +17,7 @@ if __name__ == '__main__':
 	
 	time.sleep(0.01) #let the camera decoding start up before the in thread
 
-	a = [ handler.get_ball_info, handler.get_ball_info ]
+	a = [ handler.get_strip_info, handler.get_ball_info ]
 
 	robot_in_thread = threading.Thread(target = robot.in_loop)
 	robot_out_thread = threading.Thread(target = robot.filter_loop, args = [a] )

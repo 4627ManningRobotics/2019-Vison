@@ -49,6 +49,9 @@ class Handler:
 	def get_ball_info(self):
 		return self.orange_ball.get()
 
+	def get_strip_info(self):
+		return self.strip.get()
+
 	def init_threads(self):
 		#define all threads
 		orange_ball_thread = threading.Thread( target = self.orange_ball.loop )
