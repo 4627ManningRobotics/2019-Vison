@@ -31,7 +31,7 @@ class Strip_Handler:
 			else:
 				message = self.strip_queue.get(2)
 				for key in message:
-					if key == "Y": #Y isn't the actual why, its the displacment from the object
+					if key == "Distance": #Y isn't the actual why, its the displacment from the object
 						dist = message[key]
 						message["Y"] = dist * math.sin(message["Angle"])
 						message["X"] = dist * math.cos(message["Angle"])
