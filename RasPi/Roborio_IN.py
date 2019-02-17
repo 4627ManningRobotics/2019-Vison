@@ -8,6 +8,7 @@ class Roborio:
 	#recognized calls
 	STRIP = "STRIP"
 	BALL = "BALL"
+	MOUSE = "MOUSE"
 	
 	def __init__(self):
 		self._rob = serial.Serial('/dev/roborio', baudrate = 115200, timeout = 0, bytesize = serial.EIGHTBITS, parity = serial.PARITY_NONE, stopbits = serial.STOPBITS_ONE)
@@ -37,6 +38,8 @@ class Roborio:
 					send = funcList[0]()
 				elif key == Roborio.BALL:
 					send = funcList[1]()
+				elif key == Roborio.MOUSE:
+					send = funcList[2]()
 
 				if send != None:
 					print(send)
