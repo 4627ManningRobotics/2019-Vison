@@ -3,13 +3,16 @@ import threading
 import time
 import json
 from Handlers import OrangeBallHandler
+from Handlers import StripHandler
 
 class Handler:
 	
 	def __init__(self):
 		self.data = queue.Queue(100)
 		self.orange_ball_key = "BALL"
+		self.strip_key = "STRIP"
 		self.orange_ball = OrangeBallHandler.OrangeBall_Handler(100)
+		self.strip = StripHandler.Strip_Handler(100)
 		self.init_threads()
 
 	def loop(self):
@@ -23,15 +26,18 @@ class Handler:
 						if foo["KEY"] == self.orange_ball_key:
 							#print("KEY FOUND!")
 							self.orange_ball.put(foo)
-							time.sleep(0.001)
+							time.sleep(0.0001)
+						elif foo["KEY"] == self.strip_key:
+							self.strip.put(foo)
+							time.sleep(0.0001)
 						else:
-							time.sleep(0.003)
+							time.sleep(0.0003)
 					except:
-						time.sleep(0.001)
+						time.sleep(0.0001)
 				else:
-					time.sleep(0.001)
+					time.sleep(0.0001)
 			else:
-				time.sleep(0.003)
+				time.sleep(0.0003)
 
 	def put_data(self, d):
 		if(self.data.full()):

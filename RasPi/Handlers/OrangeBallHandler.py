@@ -26,9 +26,8 @@ class OrangeBall_Handler:
 	def loop(self):
 		while True:
 			if(self.ball_queue.empty()):
-				time.sleep(0.003)
+				time.sleep(0.0003)
 			else:
-				m = self.ball_queue.get(2)
-				#print( m )
+				m = self.ball_queue.get(2) 
 				self.ball_data.put(m) 
-				time.sleep(0.001)
+				time.sleep(0.0001)

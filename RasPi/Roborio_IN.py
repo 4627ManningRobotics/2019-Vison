@@ -10,10 +10,9 @@ class Roborio:
 	BALL = "BALL"
 	
 	def __init__(self):
-		self._rob = serial.Serial('dev/roborio', baudrate = 9600)
+		self._rob = serial.Serial('/dev/roborio', baudrate = 115200, timeout = 0, bytesize = serial.EIGHTBITS, parity = serial.PARITY_NONE, stopbits = serial.STOPBITS_ONE)
 		self._buffer = u''
-		self.messages = queue.Queue(20)
-		self.out_queue = queue.Queue(100)
+		self.messages = queue.Queue(50)
 		
 	def in_loop(self):
 		message = ""
@@ -28,15 +27,19 @@ class Roborio:
 				if self.messages.full():
 					self.messages.get(2)
 				self.messages.put(message)
+			time.sleep(0.0001)
 
 	def filter_loop(self, funcList):
 		send = ""
-		for key in iter(self.messages.get, None):
-			if key == Roborio.STRIP:
-				send = funcList[0]()
-			elif key == Roborio.BALL:
-				send = funcList[1]()
+		while True:
+			for key in iter(self.messages.get, None):
+				if key == Roborio.STRIP:
+					send = funcList[0]()
+				elif key == Roborio.BALL:
+					send = funcList[1]()
 
-			if not send == "":
-				self.rob.write( bytes( json.dumps( send )))
-			time.sleep(0.01)
+				if send != None:
+					print(send)
+					self._rob.write( bytes( json.dumps( send ) + "\n", "UTF-8"))
+				send = ""
+				time.sleep(0.0001)

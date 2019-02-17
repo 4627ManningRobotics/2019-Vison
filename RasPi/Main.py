@@ -16,8 +16,10 @@ if __name__ == '__main__':
 	
 	time.sleep(0.01) #let the camera decoding start up before the in thread
 
-	robot_in_thread = threading.thread(target = robot.in_loop)
-	robot_out_thread = threading.thread(target = robot.filter_loop, args = ( handler.get_ball_info, handler.get_ball_info ))
+	a = [ handler.get_ball_info, handler.get_ball_info ]
+
+	robot_in_thread = threading.Thread(target = robot.in_loop)
+	robot_out_thread = threading.Thread(target = robot.filter_loop, args = [a] )
 	camera_thread = threading.Thread(target = camera.in_loop)
 	handler_thread = threading.Thread(target = handler.loop)
 
@@ -38,7 +40,7 @@ if __name__ == '__main__':
 
 	while True:
 		handler.put_data(camera.get_message())
-		ball_info = handler.get_ball_info()
-		if ball_info is not None:
-			print("Ball: {0}".format(ball_info))
+		#ball_info = handler.get_ball_info()
+		#if ball_info is not None:
+			#print("Ball: {0}".format(ball_info))
 		time.sleep(0.001)
