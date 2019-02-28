@@ -1,6 +1,7 @@
 import queue
 import threading
 import time
+import json
 
 class OrangeBall_Handler:
 
@@ -20,12 +21,13 @@ class OrangeBall_Handler:
 		if(self.ball_queue.empty()):
 			pass
 		else:
-			return self.ball_queue.get(2)
+			return self.ball_data.get(2)
 
 	def loop(self):
 		while True:
 			if(self.ball_queue.empty()):
-				pass
+				time.sleep(0.0003)
 			else:
-				self.ball_queue.get(2) #to be determined
-			time.sleep(1)
+				m = self.ball_queue.get(2) 
+				self.ball_data.put(m) 
+				time.sleep(0.0001)
